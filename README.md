@@ -6,20 +6,19 @@ Author: Jingsheng Tang
 
 Email: 810899799@qq.com
 
-## [BCIROS](http://weibo.com/ihubo),[GuiEngine](http://weibo.com/ihubo),[Phase](http://weibo.com/ihubo)
+## [core](),[guiengine]()
 
-## GuiEngine是什么?
-一个简洁的图形刺激引擎
+## guiengine是什么?
+一个简洁的图形刺激引擎。准确的说是一个依赖于ROS环境的python安装包。
 
-## GuiEngine的特性
-* 为了确保图形刺激的精确性，我们使用了opengl硬件加速技术，并且运用了垂直同步(Vertical Hold)方法，使每一帧图形都能被精确渲染
-* 通过GUI来发射信号标记能够在图形渲染的精确时刻记录下事件，有助于获得更可靠的信号处理结果
-* 跨平台，目前已在windows和linux系统经过测试
+## guiengine的特性
+* guiengine依赖于ROS环境，采用标准的ROS通信机制实现交互。
+* 运行guiengine前，需要确保roscore已开启
 
-## GuiEngine运行环境
-* python3，pygame，[rz_global_clock](https://github.com/trzp/sysclock)
+## guiengine依赖环境
+* python3，pygame，roscore
 
-## GuiEngine编程
+## 
 我们建议将为GUI开辟一个独立进程，以提高效率。为此我们提供了一个进程函数和一个交互接口，即：
 ```javascript
 def guiengine_proc(args):
