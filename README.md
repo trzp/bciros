@@ -44,8 +44,48 @@ from guiengine.guiengine import demo
 demo()
 ```
 
-### 程序设计
-* demo代码的内容：
+## GuiEngine程序设计
+### *from guiengine.guiengine import GuiEngine* **导入类**
+
+### *gui = GuiEngine(stims = layout, node_name='BRN_gui', topics=[])* **初始化**
+
+* 可以看到启动一个gui界面仅需要两步，第一步是初始化GuiEngine,然后调用StartRun()开始。而启动一个gui界面，意味着启动了一个ros节点。
+
+* 参数： node_name 代表本节点的名称，如果在复杂的程序设计中，GuiEngine放在一个更大的程序中，而在这个大程序中已经初始化了节点的话，在这里是不能够初始化节点的，应为一个进程只能初始化一个节点。此时在node_name处可以传递None参数，GuiEngine将不会初始化节点。
+
+* 参数：topics 代表本节点订阅的主题。可以看到我们将demo运行起来后，我们只是实现了界面的布局，元素的行为如何控制呢？通过订阅主题来实现。这里topics是一个列表，意味着它支持订阅多个主题，接受来自多个节点的控制信号，**但是这种情况下要非常注意正确的时序**。
+
+* 参数：stims 代表了界面元素的布局。它由一个字典构成，这个字典应该是这样的：
+* 示例：
+```python
+layout = {
+            'screen':{'size':(600,500),'color':(0,0,0)},
+            'cue1':{'class':'Block','parm':{'size':(100,40),'position':(600/2,30)}},
+            'cue2':{'class':'Block','parm':{'size':(100,40),'position':(600/2,60)}},
+         }
+```
+* 说明：该字典的形式为{'screen':{描述screen的属性}，'刺激1':{对刺激1的描述}，'刺激2':{对刺激2的描述}，}
+* 至少应当包含对screen的描述，screen的属性有：
+    * size: (width,height)
+    * type: fullscreen/normal
+    * color: (R,G,B)
+    * caption: string
+    * Fps: int, **一定要确认系统的Fps,linux下可通过xrandr命令查看Fps**
+    * 补充说明：当且仅当type为fullscreen时，硬件加速才可开启。因此，在正式实验时，应当使用fullscreen模式。
+
+* 对刺激的描述包含类别class和参数parm。
+* 目前支持的刺激图形有：
+    *  Block
+    *  sinBlock
+    *  Circle
+    *  sinCircle
+
+* 关于各个刺激类的使用，demo里已经给出了各个类的详细参数和可能的变化，直接参照demo即可。
+
+### gui.StartRun() **开始**
+
+
+### demo代码
 ```python
 
 from guiengine.guiengine import *
@@ -134,44 +174,6 @@ if __name__ == '__main__':
     demo()
 ```
 
-## GuiEngine实现布局
-*from guiengine.guiengine import GuiEngine*
-
-*GuiEngine(stims = layout, node_name='BRN_gui', topics=[])*
-
-* 可以看到启动一个gui界面仅需要两步，第一步是初始化GuiEngine,然后调用StartRun()开始。而启动一个gui界面，意味着启动了一个ros节点。
-
-* 参数： node_name 代表本节点的名称，如果在复杂的程序设计中，GuiEngine放在一个更大的程序中，而在这个大程序中已经初始化了节点的话，在这里是不能够初始化节点的，应为一个进程只能初始化一个节点。此时在node_name处可以传递None参数，GuiEngine将不会初始化节点。
-
-* 参数：topics 代表本节点订阅的主题。可以看到我们将demo运行起来后，我们只是实现了界面的布局，元素的行为如何控制呢？通过订阅主题来实现。这里topics是一个列表，意味着它支持订阅多个主题，接受来自多个节点的控制信号，**但是这种情况下要非常注意正确的时序**。
-
-* 参数：stims 代表了界面元素的布局。它由一个字典构成，这个字典应该是这样的：
-* 示例：
-```python
-layout = {
-            'screen':{'size':(600,500),'color':(0,0,0)},
-            'cue1':{'class':'Block','parm':{'size':(100,40),'position':(600/2,30)}},
-            'cue2':{'class':'Block','parm':{'size':(100,40),'position':(600/2,60)}},
-         }
-```
-* 说明：该字典的形式为{'screen':{描述screen的属性}，'刺激1':{对刺激1的描述}，'刺激2':{对刺激2的描述}，}
-* 至少应当包含对screen的描述，screen的属性有：
-    * size: (width,height)
-    * type: fullscreen/normal
-    * color: (R,G,B)
-    * caption: string
-    * Fps: int, **一定要确认系统的Fps,linux下可通过xrandr命令查看Fps**
-    * 补充说明：当且仅当type为fullscreen时，硬件加速才可开启。因此，在正式实验时，应当使用fullscreen模式。
-
-* 对刺激的描述包含类别class和参数parm。
-* 目前支持的刺激图形有：
-    *  Block
-    *  sinBlock
-    *  Circle
-    *  sinCircle
-
-* 关于各个刺激类的使用，demo里已经给出了各个类的详细参数和可能的变化，直接参照demo即可。
-
 ## GuiCtr实现交互
 * 前面提到，GuiEngine完成的是界面布局，它通过订阅topics来实现交互。事实上，为了更好地兼容，topics消息的格式是json字符串。该json字符串传递的是控制一个对象行为的描述，这种描述如下：
 ```python
@@ -180,26 +182,24 @@ layout = {
 ```
 * 为了隐藏对topic消息的直接操作，我们提供GuiCtr类来实现交互。
 
-* 快速开始,配合guiengine.guiengine里运行的demo,可以看到交互情况
+* **快速开始**,配合guiengine.guiengine里运行的demo,可以看到交互情况
 ```python
 from guiengine.guictr import demo
 demo()
 ```
+### GuiCtr程序设计
 
-* 程序设计
-```python
-from guiengine.guictr import GuiCtr
-GuiCtr(node_name = 'BRN_guictr',topic_name='BRT_guictr')
---update(reqdict = {}, echo = False)
-```
-   
-* GuiCtr类初始化
+### from guiengine.guictr import GuiCtr **导入类**
+
+### guictr = GuiCtr(node_name='BRN_guictr',topic_name='BRT_guictr') **初始化**
     * node_name: 节点名，为None时，不初始化node
     * topic_name: 主题名，发布消息的主题名称
-* update函数：每次调用将发布消息，请求接收节点进行gui更新
+
+### gui.update(reqdict = {}, echo = False) **请求刷新**
     * reqdict: 请求刷新的字典
     * echo: 是否将发布的消息打印到命令行
-* guiengine.guictr中demo代码：
+
+### guiengine.guictr中demo代码：
 ```python
 def demo():
     guictr = GuiCtr('BRN_guictr',topic_name='BRT_guictr')
