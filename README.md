@@ -6,79 +6,153 @@ Author: Jingsheng Tang
 
 Email: 810899799@qq.com
 
-## [core](),[guiengine]()
+# bciros
+bciros是一个依赖于ROS1环境的用于开发BCI实验程序的python包。它包含两个子集，一个是bcicore,一个是guiengine。guiengine一般只在需要设计图形交互界面的时候用到（大多数时候是需要的），而core包含了实现BCI实验程序的核心架构。
 
-## guiengine是什么?
-一个简洁的图形刺激引擎。准确的说是一个依赖于ROS环境的python安装包。
+# bciros包的安装
+pip install bcicore-1.0-py3-none-any.wheel
 
-## guiengine的特性
-* guiengine依赖于ROS环境，采用标准的ROS通信机制实现交互。
-* 运行guiengine前，需要确保roscore已开启
+pip install guiengine-1.0-py3-none-any.wheel
 
-## guiengine依赖环境
-* python3，pygame，roscore
+**如果计算机中安装有多个python,您可能需要在pip命令前加上python -m指令，限定包安装的python版本**
 
-## 
-我们建议将为GUI开辟一个独立进程，以提高效率。为此我们提供了一个进程函数和一个交互接口，即：
+# bciros的核心概念
+在bci实验中，涉及到实验流程的控制，图形刺激界面的配合，信号采集和信号处理等模块。在bciros的体系中，这里的每个功能模块将作为一个节点node在独立的进程中运行，它们之间的信息交互通过ROS标准完成，即主题的发布/订阅模式。以下是bciros中的核心概念：
+
+* phase: 状态机，决定实验流程的跳转
+* core: 核心，决定实验的核心逻辑
+* source: 信号源
+* sigpro: 信号处理
+* sigsave: 信号保存
+* guiengine: 图形引擎
+
+# bcicore
+ttttttttttttt
+
+# guiengine
+## 安装
+pip install guiengine-1.0-py3-none-any.wheel
+
+## guiengine包构成
+guiengine包包含了GuiEngine类,若干刺激类：block,sinblock,circle,sincircle和一个控制类guictr.
+
+## 快速开始
+### 安装了guiengine包后，可以运行demo查看效果
+
 ```javascript
-def guiengine_proc(args):
-    ...
-
-class GuiIF():    #用于向guiengine发射信号
-    def __init__(self,server_address = None,layout = layout):
-        ...
-        self.args = ...
-
-    def quit(self):
-        ...
-
-    def wait(self):
-        ...
-
-    def update(self,stimulus,marker):
-        ...
+from guiengine.guiengine import demo
+demo()
 ```
-典型的使用方法是：
-```javascript
+
+### 程序设计
+* demo代码的内容：
+```python
+
+from guiengine.guiengine import *
+
+def demo():
+    layout = {'screen': {'size': (600, 400), 'color': (0, 0, 0), 'type': 'normal',
+                         'Fps': 60, 'caption': 'BciRosGuiDemo'},
+
+              #nly text
+              'cue1': {'class': 'Block', 'parm': {'size': (80, 80), 'position': (100, 100), 'anchor': 'center',
+                                                  'forecolor': (100, 100, 100), 'transparent': True, 'borderon': False,
+                                                  'borderwidth': 1, 'bordercolor': (255, 0, 0),
+                                                  'textcolor': (0, 255, 0), 'textfont': 'arial', 'textanchor': 'center',
+                                                  'textsize': 20, 'textbold': False, 'text': 'hello', 'layer': 1,
+                                                  'visible': True}},
+              #text + shadow
+              'cue2': {'class': 'Block', 'parm': {'size': (80, 80), 'position': (200, 100), 'anchor': 'center',
+                                                  'forecolor': (100, 100, 100), 'transparent': False, 'borderon': False,
+                                                  'borderwidth': 1, 'bordercolor': (255, 0, 0),
+                                                  'textcolor': (0, 255, 0), 'textfont': 'arial', 'textanchor': 'midleft',
+                                                  'textsize': 20, 'textbold': False, 'text': 'hello', 'layer': 1,
+                                                  'visible': True}},
+              #text + border
+              'cue3': {'class': 'Block', 'parm': {'size': (80, 80), 'position': (300, 100), 'anchor': 'center',
+                                                  'forecolor': (100, 100, 100), 'transparent': True, 'borderon': True,
+                                                  'borderwidth': 1, 'bordercolor': (255, 0, 0),
+                                                  'textcolor': (0, 255, 0), 'textfont': 'arial', 'textanchor': 'midright',
+                                                  'textsize': 20, 'textbold': False, 'text': 'hello', 'layer': 1,
+                                                  'visible': True}},
+
+              # text + border + shadow
+              'cue4': {'class': 'Block', 'parm': {'size': (80, 80), 'position': (400, 100), 'anchor': 'center',
+                                                  'forecolor': (100, 100, 100), 'transparent': False, 'borderon': True,
+                                                  'borderwidth': 1, 'bordercolor': (255, 0, 0),
+                                                  'textcolor': (0, 255, 0), 'textfont': 'arial', 'textanchor': 'midbottom',
+                                                  'textsize': 20, 'textbold': False, 'text': 'hello', 'layer': 1,
+                                                  'visible': True}},
+              # text + border + sin
+              'cue5': {'class': 'sinBlock', 'parm': {'size': (80, 80), 'position': (500, 100), 'anchor': 'center',
+                                                     'bordercolor': (255, 0, 0), 'borderon': True, 'borderwidth': 2,
+                                                     'textcolor': (0, 255, 0), 'textfont': 'arial',
+                                                     'textanchor': 'midtop', 'textsize': 20, 'textbold': False,
+                                           'text': 'hello', 'layer': 1, 'visible': True,
+                                                     'start': True, 'frequency': 10, 'phase': 0}},
+
+              # only text
+              'cue6': {'class': 'Circle',
+                       'parm': {'radius': 40, 'position': (100, 300), 'anchor': 'center', 'forecolor': (100, 100, 100),
+                                'transparent': True, 'borderon': False, 'borderwidth': 2, 'bordercolor': (255, 0, 0),
+                                'textcolor': (0, 255, 0), 'textfont': 'arial', 'textanchor': 'center',
+                                'textsize': 20, 'textbold': False, 'text': 'hello', 'layer': 1, 'visible': True}},
+
+              # text + shadow
+              'cue7': {'class': 'Circle',
+                       'parm': {'radius': 40, 'position': (200, 300), 'anchor': 'center', 'forecolor': (100, 100, 100),
+                                'transparent': False, 'borderon': False, 'borderwidth': 2, 'bordercolor': (255, 0, 0),
+                                'textcolor': (0, 255, 0), 'textfont': 'arial', 'textanchor': 'center',
+                                'textsize': 20, 'textbold': False, 'text': 'hello', 'layer': 1, 'visible': True}},
+
+              # text + border
+              'cue8': {'class': 'Circle',
+                       'parm': {'radius': 40, 'position': (300, 300), 'anchor': 'center', 'forecolor': (100, 100, 100),
+                                'transparent': True, 'borderon': True, 'borderwidth': 2, 'bordercolor': (255, 0, 0),
+                                'textcolor': (0, 255, 0), 'textfont': 'arial', 'textanchor': 'center',
+                                'textsize': 20, 'textbold': False, 'text': 'hello', 'layer': 1, 'visible': True}},
+
+              # text + shadow + border
+              'cue9': {'class': 'Circle',
+                       'parm': {'radius': 40, 'position': (400, 300), 'anchor': 'center', 'forecolor': (100, 100, 100),
+                                'transparent': False, 'borderon': True, 'borderwidth': 2, 'bordercolor': (255, 0, 0),
+                                'textcolor': (0, 255, 0), 'textfont': 'arial', 'textanchor': 'center',
+                                'textsize': 20, 'textbold': False, 'text': 'hello', 'layer': 1, 'visible': True}},
+
+              # text + shadow + border
+              'cue10': {'class': 'sinCircle',
+                        'parm': {'radius': 40, 'position': (500, 300), 'anchor': 'center', 'borderon': True,
+                                 'borderwidth': 2, 'bordercolor': (255, 0, 0), 'textcolor': (0, 255, 0),
+                                 'textfont': 'arial', 'textanchor': 'center', 'textsize': 20, 'textbold': False,
+                                 'text': 'hello', 'layer': 1, 'visible': True, 'start': True, 'frequency': 8,
+                                 'phase': 0}},
+              }
+    gui = GuiEngine(layout, 'BRN_gui', ['BRT_guictr'])
+    gui.StartRun()
+
 if __name__ == '__main__':
-    # 布局
-    layout = {'screen':{'size':(200,200),'color':(0,0,0),'type':'normal',
-                        'Fps':60,'caption':'this is an example'},
-             'cue':{'class':'sinBlock','parm':{'size':(100,100),'position':(100,100),
-                    'frequency':13,'visible':True,'start':False}}}
-    
-    # 远程服务器的地址，用来接收marker。该例程不使用。
-    saddr = None
-    
-    # 建立与GUI交互的接口
-    gui = GuiIF(saddr,layout) 
-    
-    # 为guiengine_proc开辟一个独立的进程，其参数是gui.args
-    _ = multiprocessing.Process(target = guiengine_proc,args = (gui.args,)) # 新建进程启动GUI
-    _.start()
-    
-    gui.wait()      # 等待GUI启动（一般初始化过程需要1-2秒)
-    time.sleep(1)
-    gui.update({'cue':{'start':True}},{})  # 更新GUI且发送marker（此处发送的marker为None）
-    time.sleep(1)
-    gui.update({'cue': {'start': False}}, {}) # 更新GUI且发送marker
-    time.sleep(1)
-    gui.quit()      # 关闭GUI
+    demo()
 ```
 
-## GuiIF编程说明
-用户通过GuiIF类进行初始化以及与GUI进程的交互。因此，仅需要了解GuiIF的使用
-### 初始化参数：server_address
-为远端服务器地址（ip,port），该服务器用来通过udp socket接收GUI进程发送的marker消息。如果该参数为None,则GUI不发送marker消息，**注意，此时如果在GuiIF.update()中尝试传入非空的marker字典，将引发异常。因为初始化不发送marker,那么在update时就应当填入空的字典{}**
-    
-### 初始化参数：layout
-* 布局，字典类型
+## GuiEngine实现布局
+*from guiengine.guiengine import GuiEngine*
+
+*GuiEngine(stims = layout, node_name='BRN_gui', topics=[])*
+
+* 可以看到启动一个gui界面仅需要两步，第一步是初始化GuiEngine,然后调用StartRun()开始。而启动一个gui界面，意味着启动了一个ros节点。
+
+* 参数： node_name 代表本节点的名称，如果在复杂的程序设计中，GuiEngine放在一个更大的程序中，而在这个大程序中已经初始化了节点的话，在这里是不能够初始化节点的，应为一个进程只能初始化一个节点。此时在node_name处可以传递None参数，GuiEngine将不会初始化节点。
+
+* 参数：topics 代表本节点订阅的主题。可以看到我们将demo运行起来后，我们只是实现了界面的布局，元素的行为如何控制呢？通过订阅主题来实现。这里topics是一个列表，意味着它支持订阅多个主题，接受来自多个节点的控制信号，**但是这种情况下要非常注意正确的时序**。
+
+* 参数：stims 代表了界面元素的布局。它由一个字典构成，这个字典应该是这样的：
 * 示例：
 ```python
-sti = {'screen':{'size':(600,500),'color':(0,0,0)},
-        'cue':{'class':'Block','parm':{'size':(100,40),'position':(600/2,30),
-        'anchor':'center','visible':True,'forecolor':(0,0,0),'text':'tangjign',
-        'textsize':25,'textcolor':(0,0,255),'textanchor':'center'}}}
+layout = {
+            'screen':{'size':(600,500),'color':(0,0,0)},
+            'cue1':{'class':'Block','parm':{'size':(100,40),'position':(600/2,30)}},
+            'cue2':{'class':'Block','parm':{'size':(100,40),'position':(600/2,60)}},
+         }
 ```
 * 说明：该字典的形式为{'screen':{描述screen的属性}，'刺激1':{对刺激1的描述}，'刺激2':{对刺激2的描述}，}
 * 至少应当包含对screen的描述，screen的属性有：
@@ -86,35 +160,57 @@ sti = {'screen':{'size':(600,500),'color':(0,0,0)},
     * type: fullscreen/normal
     * color: (R,G,B)
     * caption: string
-    * Fps: int, strongly suggest you set Fps as the same with system's Fps
-    * 补充说明：Fps应当设置为与系统一致，确保在系统垂直同步开启失败时能够保持正确同步。另外，当且仅当type为fullscreen时，硬件加速和垂直同步才可开启。因此，在正式实验时，应当使用fullscreen模式。
+    * Fps: int, **一定要确认系统的Fps,linux下可通过xrandr命令查看Fps**
+    * 补充说明：当且仅当type为fullscreen时，硬件加速才可开启。因此，在正式实验时，应当使用fullscreen模式。
 
-* 对其他刺激的描述：如例子中key'刺激1'为对该刺激唯一的标识，其item为一个字典，来具体描述其内容，包含class和parm两个key。class对应了刺激图形类型，parm用来描述这个刺激图形的参数。
+* 对刺激的描述包含类别class和参数parm。
 * 目前支持的刺激图形有：
-    *  Block: 用以标识方块，文本等
-    *  sinBlock: 用以表示灰度以正弦波规律变化的方块
-    *  mBlock： 用以标识灰度以随机编码调制变化的方块
-    *  ImageBox：用以加载图像的纹理
+    *  Block
+    *  sinBlock
+    *  Circle
+    *  sinCircle
 
-### GuiIF方法：wait()
-由于GUI程序启动需要完成初始化等工作，一般需要2-3秒。在正式开始实验之前应当使用wait()来等待GUI完成启动。
+* 关于各个刺激类的使用，demo里已经给出了各个类的详细参数和可能的变化，直接参照demo即可。
 
-### GuiIF方法：quit()
-关闭GUI
+## GuiCtr实现交互
+* 前面提到，GuiEngine完成的是界面布局，它通过订阅topics来实现交互。事实上，为了更好地兼容，topics消息的格式是json字符串。该json字符串传递的是控制一个对象行为的描述，这种描述如下：
+```python
+# json字符串，实际上就是将python的字典转换为了json字符串
+{'cue5': {'start': False},'cue10': {'start': False}}
+```
+* 为了隐藏对topic消息的直接操作，我们提供GuiCtr类来实现交互。
 
-### GuiIF方法：update(stims,marker)
-该方法用来修改GUI布局元素的行为以及发送marker,**该marker和stims是对应的，GUI进程当且仅当完成该stims的渲染时刻记录下marker的时间戳**
-
-* stims:字典
-* 示例
-```javascript
-{'cue':{'visible':True,'forecolor':(255,0,0)}} # cue可见且颜色设置为红色
+* 快速开始,配合guiengine.guiengine里运行的demo,可以看到交互情况
+```python
+from guiengine.guictr import demo
+demo()
 ```
 
-* marker:字典
-* 示例
-```javascript
-{'cue_mkr':{'value':[1]}}
+* 程序设计
+```python
+from guiengine.guictr import GuiCtr
+GuiCtr(node_name = 'BRN_guictr',topic_name='BRT_guictr')
+--update(reqdict = {}, echo = False)
 ```
-* 机制：当GUI接受到update请求后立即按照stims的内容准备好相关内容，在GUI主循环刷新信号到来后立即将其渲染到屏幕，此时记录下全局时间戳，将该时间戳记录到marker中，将为其添加timestamp键值，即 {'cue_mkr':{'value':[1],'timestamp':[xxx]}}。事实上，内部使用了Marker类，意味着该时间戳将自动与远程服务器的时钟对准（无需用户关心该细节）。且为了减少网络通信的开销，marker会有短暂的缓存机制，确保marker通过socket向远端发送的时间间隔不低于0.1秒。**这里需要在信号处理部分稍加注意**
-
+   
+* GuiCtr类初始化
+    * node_name: 节点名，为None时，不初始化node
+    * topic_name: 主题名，发布消息的主题名称
+* update函数：每次调用将发布消息，请求接收节点进行gui更新
+    * reqdict: 请求刷新的字典
+    * echo: 是否将发布的消息打印到命令行
+* guiengine.guictr中demo代码：
+```python
+def demo():
+    guictr = GuiCtr('BRN_guictr',topic_name='BRT_guictr')
+    rospy.sleep(3)
+    guictr.update({'cue5': {'start': False},'cue10': {'start': False}},True)
+    rospy.sleep(3)
+    guictr.update({'cue5': {'start': True}, 'cue10': {'start': True}}, True)
+    rospy.sleep(3)
+    guictr.update({'cue5': {'start': False}, 'cue10': {'start': False}}, True)
+    rospy.sleep(1)
+    guictr.update({'_quit_':None},True)
+    rospy.sleep(1)
+```
+**update请求参数为 {'\_quit\_':None}时将请求gui主节点结束进程**
