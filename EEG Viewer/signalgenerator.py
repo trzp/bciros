@@ -51,10 +51,10 @@ class SigGen(object):   #产生125hz正弦数据
         vals = []
         for f in flst:
             val = np.sin(2 * np.pi * f * t_base) * self.gain
-            val = list(val.astype(np.int32).astype(np.str))
             vals.append(val)
+        vals = np.vstack(vals)
+        return vals,vals.astype(np.int32).astype(np.str)
 
-        return vals
 
 if __name__ == "__main__":
     src = SigGen(125,100)
