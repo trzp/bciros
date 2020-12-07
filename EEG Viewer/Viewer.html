@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>BciRos tool: EEG viewer</title>
+        <link rel="stylesheet" href="./Themes/w3.css">
+        <link rel="stylesheet" type="text/css" class="theme_css" href="./Themes/cyBlue.css" id="theme_css">
+
+    </head>
+
+    <body>
+         <div id = "connectBar">
+            <div id="innerBar">
+              <div id="hostPort">
+                Host <input id="cyHost" type="text" value="127.0.0.1" />
+                Port <input id="cyPort" type="text" maxlength="5" size="5" value="54123"/>
+                <div id="connectButtons">
+                 <input id="cyConnect" class="w3-bar-item w3-black  w3-hover-blue" type="button" value="Connect" />
+                 <input id="cyDisconnect" class="w3-bar-item w3-black w3-hover-red" type="button" value="Disconnect" />
+                </div>
+               </div>
+
+            </div>
+        </div>
+
+       <div id="versionInfo">
+           BciRos V1.0 EEG Viewer &emsp13;
+           Copyright (C) 2018, Nudt, JingshengTang, All Rights Reserved &emsp13;
+           mrtang_cs@163.com
+       </div>
+
+        <div class="tooltip" id="logo-picture" ></div>
+
+        <div id="sliderPanel">
+                    Plot Gain:
+                    <div class="eeg_resolution">
+                        <div class="tooltip">
+                        <input id="myRange" type="range" min="1" max="20" value="10" step="1" class="slider"">
+                            <label id="CyRes" class="tooltiptext" style="position:relative; margin-left: 60px; top: -40px;" > &nbsp&nbsp 1 &nbsp&nbsp</label>
+                        </div>
+                    </div>
+        </div>
+
+
+         <div id="recordingPanel">
+            <label style="color:#aaaaaa;">Record Filename: &nbsp&nbsp</label>
+            <input id="cyRecordFile" type="text" style="width:35%" value="EEG-recording_1" >
+            <input id="cyStartRecord" class="w3-bar-item w3-black  w3-hover-gray" type="button" value="Record">
+            <input id="cyStopRecord" class="w3-bar-item w3-black  w3-hover-gray" type="button" value="Stop" >
+        </div>
+        
+        
+
+        <div id="canvasPane" >
+            <canvas id="eegCanvas" width="1800" height="800"></canvas>
+        </div>
+
+
+        <script src="./Scripts/SocketClient.js"    charset="utf-8"></script>
+         <script src="./Scripts/Interface.js"    charset="utf-8"></script>
+         <script src="./Scripts/graphics.js"    charset="utf-8"></script>
+
+    </body>
+</html>
