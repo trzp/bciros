@@ -2,6 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="069c0ac8-9334-4308-ac56-1b26c5e867be" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/Interface.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Interface.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/graphics.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/graphics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Themes/cyBlue.css" beforeDir="false" afterPath="$PROJECT_DIR$/Themes/cyBlue.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Themes/w3.css" beforeDir="false" afterPath="$PROJECT_DIR$/Themes/w3.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Viewer.html" beforeDir="false" afterPath="$PROJECT_DIR$/Viewer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ads_reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/ads_reader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server1.py" beforeDir="false" afterPath="$PROJECT_DIR$/server1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/signalgenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/signalgenerator.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -11,24 +19,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/storage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="82" column="34" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="34" />
-              <folding>
-                <element signature="e#161#183#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="102" column="25" selection-start-line="102" selection-start-column="25" selection-end-line="102" selection-end-column="25" />
+            <state relative-caret-position="-133">
+              <caret line="44" selection-start-line="44" selection-end-line="44" />
               <folding>
                 <element signature="e#250#283#0" expanded="true" />
               </folding>
@@ -37,22 +33,55 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ads_reader.py">
+        <entry file="file://$PROJECT_DIR$/Viewer.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1254">
-              <caret line="66" column="24" selection-start-line="66" selection-start-column="24" selection-end-line="66" selection-end-column="24" />
+            <state relative-caret-position="209">
+              <caret line="44" column="58" lean-forward="true" selection-start-line="44" selection-start-column="58" selection-end-line="44" selection-end-column="58" />
               <folding>
-                <element signature="e#259#270#0" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Scripts/Interface.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Scripts/graphics.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1767">
+              <caret line="93" column="62" lean-forward="true" selection-start-line="93" selection-start-column="62" selection-end-line="93" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/serial_ads.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1045">
+              <caret line="63" selection-start-line="63" selection-end-line="63" />
+              <folding>
+                <element signature="e#255#271#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/signalgenerator.py">
+        <entry file="file://$PROJECT_DIR$/ads_reader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="860">
-              <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
+            <state relative-caret-position="1159">
+              <caret line="65" column="57" selection-start-line="65" selection-start-column="57" selection-end-line="65" selection-end-column="57" />
               <folding>
                 <element signature="e#259#270#0" expanded="true" />
               </folding>
@@ -68,10 +97,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ads_reader.py" />
         <option value="$PROJECT_DIR$/signalgenerator.py" />
-        <option value="$PROJECT_DIR$/server1.py" />
         <option value="$PROJECT_DIR$/storage.py" />
+        <option value="$PROJECT_DIR$/serial_ads.py" />
+        <option value="$PROJECT_DIR$/server1.py" />
+        <option value="$PROJECT_DIR$/ads_reader.py" />
+        <option value="$PROJECT_DIR$/Scripts/graphics.js" />
+        <option value="$PROJECT_DIR$/Viewer.html" />
+        <option value="$PROJECT_DIR$/Scripts/Interface.js" />
       </list>
     </option>
   </component>
@@ -104,6 +137,11 @@
               <item name="EEG Viewer" type="b2602c69:ProjectViewProjectNode" />
               <item name="EEG Viewer" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="EEG Viewer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EEG Viewer" type="462c0819:PsiDirectoryNode" />
+              <item name="Scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -112,6 +150,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -192,39 +231,36 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14488935" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14488935" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.40130153" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3167028" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ads_reader.py">
+    <entry file="file://$PROJECT_DIR$/storage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1254">
-          <caret line="66" column="24" selection-start-line="66" selection-start-column="24" selection-end-line="66" selection-end-column="24" />
-          <folding>
-            <element signature="e#259#270#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="361">
+          <caret line="82" column="34" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/signalgenerator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="860">
+        <state relative-caret-position="988">
           <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
           <folding>
             <element signature="e#259#270#0" expanded="true" />
@@ -234,21 +270,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="102" column="25" selection-start-line="102" selection-start-column="25" selection-end-line="102" selection-end-column="25" />
+        <state relative-caret-position="-133">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
           <folding>
             <element signature="e#250#283#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/storage.py">
+    <entry file="file://$PROJECT_DIR$/serial_ads.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="82" column="34" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="34" />
+        <state relative-caret-position="1045">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
           <folding>
-            <element signature="e#161#183#0" expanded="true" />
+            <element signature="e#255#271#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ads_reader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1159">
+          <caret line="65" column="57" selection-start-line="65" selection-start-column="57" selection-end-line="65" selection-end-column="57" />
+          <folding>
+            <element signature="e#259#270#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scripts/graphics.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1767">
+          <caret line="93" column="62" lean-forward="true" selection-start-line="93" selection-start-column="62" selection-end-line="93" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Viewer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="44" column="58" lean-forward="true" selection-start-line="44" selection-start-column="58" selection-end-line="44" selection-end-column="58" />
+          <folding>
+            <element signature="n#style#0;n#label#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scripts/Interface.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
         </state>
       </provider>
     </entry>

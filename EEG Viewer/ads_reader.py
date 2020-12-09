@@ -51,7 +51,7 @@ class adsSource(object):
     def reset_clk(self):
         pass
     
-    def getdata_asstrlist(self,p=None):
+    def getdata_asstrlist(self):
         data = self.ads.readarray()
         self.signal.append(data)
         eeg = np.hstack(self.signal)[:, -self._plength:]
@@ -63,7 +63,7 @@ class adsSource(object):
             if self._bp:
                 sig = scipy_signal.filtfilt(self.bpB, self.bpA, sig)
             
-            sig1 = sig[:,-self._slength:self.downsample:]                                  #将采样到125hz
+            sig1 = sig[:,-self._slength::self.downsample]                               #将采样到125hz
             return sig1,sig1.astype(np.int32).astype(np.str)
         else:
             return None

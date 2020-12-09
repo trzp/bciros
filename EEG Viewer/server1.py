@@ -18,7 +18,7 @@ from multiprocessing import Queue
 from multiprocessing import Event
 from storage import *
 
-MODEL = 'ads'
+#MODEL = 'ads'
 MODEL = 'generator'
 
 class sigServer(threading.Thread):
@@ -26,11 +26,12 @@ class sigServer(threading.Thread):
         self.ip = ip
         self.port = port
 
+        self.flst = [6,7,8,9,10,11,12,13]
+
         if MODEL == 'generator':
-            self.src = SigGen(125,20)
-            self.flst = [10,17,18,19,20,21,22,25]
+            self.src = SigGen(125,20,self.flst)
         elif MODEL == 'ads':
-            self.src = adsSource("COM3",True,[1,90])
+            self.src = adsSource("COM26",True,[1,90])
             
         self.ws = tWebSocket(ip,port)
 
@@ -41,7 +42,7 @@ class sigServer(threading.Thread):
         self.setDaemon(True)
 
     def getdata(self):
-        vals,data = self.src.getdata_asstrlist(self.flst)
+        vals,data = self.src.getdata_asstrlist()
         self.store.write(vals)
         if data is None:    return None
         bufs = []

@@ -7,7 +7,7 @@
 
     </head>
 
-    <body>
+    <body>    
          <div id = "connectBar">
             <div id="innerBar">
               <div id="hostPort">
@@ -30,18 +30,25 @@
 
         <div class="tooltip" id="logo-picture" ></div>
 
-        <div id="sliderPanel">
-                    Plot Gain:
-                    <div class="eeg_resolution">
-                        <div class="tooltip">
-                        <input id="myRange" type="range" min="1" max="20" value="10" step="1" class="slider"">
-                            <label id="CyRes" class="tooltiptext" style="position:relative; margin-left: 60px; top: -40px;" > &nbsp&nbsp 1 &nbsp&nbsp</label>
-                        </div>
-                    </div>
-        </div>
+<!--        <div id="sliderPanel">-->
+<!--                    Plot Gain:-->
+<!--                    <div class="eeg_resolution">-->
+<!--                        <div class="tooltip">-->
+<!--                        <input id="myRange" type="range" min="1" max="20" value="10" step="1" class="slider"">-->
+<!--                            <label id="CyRes" class="tooltiptext" style="position:relative; margin-left: 60px; top: -40px;" > &nbsp&nbsp 1 &nbsp&nbsp</label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--        </div>-->
+        
+         <div id="sliderPanel">
+             <label style="color:#aaaaaa;">Gain:&nbsp&nbsp</label>
+             <label id="GainLabel" style="color:#aaaaaa;"></label>
+             <input id="GainInc" class="w3-bar-item w3-black  w3-hover-gray" type="button" value="&nbsp&nbsp Inc+ &nbsp&nbsp">
+             <input id="GainDec" class="w3-bar-item w3-black  w3-hover-gray" type="button" value="&nbsp&nbsp Dec- &nbsp&nbsp" >
+         </div>
 
 
-         <div id="recordingPanel">
+        <div id="recordingPanel">
             <label style="color:#aaaaaa;">SubjectName: &nbsp&nbsp</label>
             <input id="cyRecordFile" type="text" style="width:35%" value="Tom_EEG_recording" >
             <input id="cyStartRecord" class="w3-bar-item w3-black  w3-hover-gray" type="button" value="Record">
@@ -49,6 +56,18 @@
         </div>
         
         
+        
+        <div id="channelsPanel">
+            <label style="color:#aaaaaa;">Channels: &nbsp&nbsp</label>
+            <input type="checkbox" checked name="channels" value="ch1" onclick = "resizeCanvas()"/>ch1 &nbsp&nbsp
+            <input type="checkbox" checked name="channels" value="ch2" onclick = "resizeCanvas()" />ch2 &nbsp&nbsp
+            <input type="checkbox" checked name="channels" value="ch3" onclick = "resizeCanvas()" />ch3 &nbsp&nbsp
+            <input type="checkbox" checked name="channels" value="ch4" onclick = "resizeCanvas()" />ch4 &nbsp&nbsp
+            <input type="checkbox" checked name="channels" value="ch5" onclick = "resizeCanvas()" />ch5 &nbsp&nbsp
+            <input type="checkbox" checked name="channels" value="ch6" onclick = "resizeCanvas()" />ch6 &nbsp&nbsp
+            <input type="checkbox" checked name="channels" value="ch7" onclick = "resizeCanvas()" />ch7 &nbsp&nbsp
+            <input type="checkbox" checked name="channels" value="ch8" onclick = "resizeCanvas()" />ch8 &nbsp&nbsp
+        </div>
 
         <div id="canvasPane" >
             <canvas id="eegCanvas" width="1800" height="800"></canvas>

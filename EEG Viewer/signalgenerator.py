@@ -13,9 +13,10 @@ import numpy as np
 
 
 class SigGen(object):   #产生125hz正弦数据
-    def __init__(self,fs,gain):
+    def __init__(self,fs,gain,flst):
         self.fs = fs
         self.gain = gain
+        self.flst = flst
         self.tstp = 1./self.fs
         self.clk = time.perf_counter()
 
@@ -43,13 +44,13 @@ class SigGen(object):   #产生125hz正弦数据
 
         return np.vstack(vals)
 
-    def getdata_asstrlist(self,flst):
+    def getdata_asstrlist(self):
         t_base = self.get_t_base()
         if t_base is None:
             return None
 
         vals = []
-        for f in flst:
+        for f in self.flst:
             val = np.sin(2 * np.pi * f * t_base) * self.gain
             vals.append(val)
         vals = np.vstack(vals)

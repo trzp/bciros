@@ -13,7 +13,14 @@ var line_size = 1;
 
 var colors = ["#FF1493","#B03060","#2E8B57","#FF00FF","#8A2BE2","#00FA9A","#EE0000","#FF6347","#8B2323","#FFC125","#FF1493","#B03060","#2E8B57","#FF00FF","#8A2BE2","#00FA9A","#EE0000","#FF6347","#8B2323","#FFC125"];
 
-function resizeCanvas() 
+
+var ch_checkboxs = document.getElementsByName("channels");
+ch_checkboxs.onclick = function(e)
+{
+    relayout();
+}
+
+function relayout() 
 {
     cyCanvas.width   = (document.getElementById('canvasPane').offsetWidth );
     cyCanvas.height  = (document.getElementById('canvasPane').offsetHeight);
@@ -21,14 +28,41 @@ function resizeCanvas()
     canvasWidth = cyCanvas.width;
     canvasHeight = cyCanvas.height;
     
-    unit = Math.round(canvasHeight/eegchnum)
-    uunit = Math.round(canvasHeight/(2*eegchnum))
-    
-    for (i=0;i<eegchnum;i++)
+    //统计有多少个待显示的通道
+    num = 0;
+    for(i=0;i<eegchnum;i++)
     {
-        yoffset.push(uunit + i*unit);
+        if(ch_checkboxs[i].checked)
+        {
+            num ++;
+        }
     }
     
+    //分割
+    if (num==0)
+    {
+        unit = 0;
+        uunit = 0;
+    }
+    else
+    {
+        unit = Math.round(canvasHeight/num);
+        uunit = Math.round(canvasHeight/(2*num));
+    
+    }
+
+    
+    indx = 0;
+    for (i=0;i<eegchnum;i++)
+    {
+        if (ch_checkboxs[i].checked)
+        {
+            off = uunit + unit*indx;
+            indx ++;
+            yoffset[i] = off;
+        }
+    }
+
     xscale = canvasWidth/500;
 }
 
@@ -45,22 +79,26 @@ function plot()
 
     
     data = eeg.concat();  //deep clone
-    for(i=0;i<8;i++)
+    for(i=0;i<eegchnum;i++)
     {
-        x0 = 0;
-        ctx.strokeStyle=colors[i];
-        ctx.beginPath();
-        ctx.moveTo(x0,yoffset[i]);
-        dat = data[i];
-        for(j=0;j<dat.length;j++)
+        if (ch_checkboxs[i].checked)
         {
-            x0 += xscale;
-            ctx.lineTo(x0,dat[j]*plotgain+yoffset[i]);
+            x0 = 0;
+            ctx.strokeStyle=colors[i];
+            ctx.beginPath();
+            ctx.moveTo(x0,yoffset[i]);
+            dat = data[i];
+            for(j=0;j<dat.length;j++)
+            {
+                x0 += xscale;
+                ctx.lineTo(x0,dat[j] * plotgain + yoffset[i]);
+            }
+            ctx.stroke();
+            ctx.closePath();
         }
-        ctx.stroke();
-        ctx.closePath();
+        
     }
     
 }
 
-setInterval("plot()",200);
+setInterval("plot()",100);
